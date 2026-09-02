@@ -3,6 +3,7 @@
 import { NavProvider, useNav } from '@/lib/nav';
 import { LandingPage } from '@/components/landing-page';
 import { CoherentFeed } from '@/components/coherent-feed';
+import { CoherentRantDetail } from '@/components/coherent-rant-detail';
 import { AppShell } from '@/components/app-shell';
 import { DiscoverPage } from '@/components/views/discover';
 import { RantFeed } from '@/components/views/rant-feed';
@@ -31,9 +32,14 @@ function Router() {
     return <LandingPage onEnter={() => navigate({ name: 'concern-create', step: 'origin' })} />;
   }
 
-  // Coherent feed — the primary social surface (no AppShell, it has its own layout)
+  // Coherent feed — the primary social surface (scrollable list of rants)
   if (route.name === 'feed') {
     return <CoherentFeed />;
+  }
+
+  // Coherent rant detail — single rant opened with right context rail
+  if (route.name === 'rant') {
+    return <CoherentRantDetail id={route.id} />;
   }
 
   // Coherent sidebar routes — render the feed with different filters (stubs for now)
