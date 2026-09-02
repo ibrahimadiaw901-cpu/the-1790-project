@@ -51,10 +51,12 @@ export function LandingPage({ onEnter }: { onEnter: () => void }) {
             <span className="font-display text-[28px] font-semibold leading-none tracking-[-.07em]">1790<span className="text-[#bb4937]">.</span></span>
           </div>
           <nav className="hidden items-center gap-6 sm:flex">
-            <button onClick={() => navigate({ name: 'app' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Trending</button>
-            <button onClick={() => navigate({ name: 'app/concerns' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Rants</button>
-            <button onClick={() => navigate({ name: 'app/discovery' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Discovery</button>
-            <button onClick={() => navigate({ name: 'learn-more' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">How it works</button>
+            <button onClick={() => navigate({ name: 'landing' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Trending</button>
+            <button onClick={() => navigate({ name: 'rants' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Rants</button>
+            <button onClick={() => navigate({ name: 'discover' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Discover</button>
+            <button onClick={() => navigate({ name: 'districts' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Districts</button>
+            <button onClick={() => navigate({ name: 'subjects' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Subjects</button>
+            <button onClick={() => navigate({ name: 'campaigns' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Campaigns</button>
             <button onClick={() => requestAuth()} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Sign in</button>
             <button onClick={onEnter} className="rounded-md bg-[#bb4937] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#a03e2e]">Start a petition</button>
           </nav>

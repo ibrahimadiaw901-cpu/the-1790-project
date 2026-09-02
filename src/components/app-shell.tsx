@@ -1,15 +1,16 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import { Link } from '@/lib/router-compat';
-import { usePathname, useRouter } from '@/lib/router-compat';
+import { Link, usePathname, useRouter } from '@/lib/router-compat';
+import { requestAuth } from '@/lib/auth-gate';
 
 const navItems = [
-  { href: '/app/concerns', label: 'Rants' },
-  { href: '/app/discovery', label: 'Local discovery' },
-  { href: '/app/discovery?tab=issue', label: 'Subjects' },
-  { href: '/app', label: 'Trending' },
-  { href: '/app/portal', label: 'Campaigns' },
+  { href: '/', label: 'Trending' },
+  { href: '/rants', label: 'Rants' },
+  { href: '/discover', label: 'Discover' },
+  { href: '/districts', label: 'Districts' },
+  { href: '/subjects', label: 'Subjects' },
+  { href: '/campaigns', label: 'Campaigns' },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -20,20 +21,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = search.trim();
-    if (trimmed) router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+    if (trimmed) router.push(`/discover?q=${encodeURIComponent(trimmed)}`);
   }
 
   function isActive(href: string): boolean {
-    const [path] = href.split('?');
-    if (path === '/app') return pathname === '/app';
-    return pathname.startsWith(path);
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
   }
 
   return (
     <div className="min-h-screen bg-white text-[#17202a]">
       <header className="sticky top-0 z-20 border-b border-[#e5e9ec] bg-white/95 px-5 backdrop-blur sm:px-8 lg:px-10">
         <div className="flex min-h-[74px] items-center gap-6">
-          <Link href="/app" className="shrink-0">
+          <Link href="/" className="shrink-0">
             <span className="block text-[9px] font-bold uppercase tracking-[.22em] text-[#687784]">The</span>
             <span className="font-display text-[27px] font-semibold leading-none tracking-[-.07em]">1790<span className="text-[#bb4937]">.</span></span>
           </Link>
@@ -54,7 +54,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </div>
             </form>
             <button onClick={() => requestAuth()} className="hidden text-sm font-semibold text-[#52636f] transition hover:text-[#244e68] sm:block">Sign in</button>
-            <Link href="/app/create" className="rounded-md bg-[#bb4937] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#a03e2e]">Start a petition</Link>
+            <Link href="/concerns/new/origin" className="rounded-md bg-[#bb4937] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#a03e2e]">Start a petition</Link>
           </div>
         </div>
         <div className="flex gap-5 overflow-x-auto pb-3 lg:hidden">
