@@ -43,26 +43,16 @@ export function LandingPage({ onEnter }: { onEnter: () => void }) {
 
   return (
     <main className="min-h-screen bg-white text-[#17202a]">
-      {/* Header — with Start a petition button in nav */}
+      {/* Header — minimal: logo + Sign in + Start a petition (capture action early) */}
       <header className="px-6 py-5 sm:px-10 lg:px-16">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="block text-[10px] font-bold uppercase tracking-[.22em] text-[#687784]">The</span>
-            <span className="font-display text-[28px] font-semibold leading-none tracking-[-.07em]">1790<span className="text-[#bb4937]">.</span></span>
+            <span className="font-display text-[28px] font-bold leading-none tracking-[-.04em] text-[#2563eb]">Coherent</span>
           </div>
-          <nav className="hidden items-center gap-6 sm:flex">
-            <button onClick={() => navigate({ name: 'landing' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Trending</button>
-            <button onClick={() => navigate({ name: 'rants' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Rants</button>
-            <button onClick={() => navigate({ name: 'discover' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Discover</button>
-            <button onClick={() => navigate({ name: 'districts' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Districts</button>
-            <button onClick={() => navigate({ name: 'subjects' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Subjects</button>
-            <button onClick={() => navigate({ name: 'campaigns' })} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Campaigns</button>
+          <div className="flex items-center gap-3">
             <button onClick={() => requestAuth()} className="text-sm font-semibold text-[#52636f] transition hover:text-[#244e68]">Sign in</button>
-            <button onClick={onEnter} className="rounded-md bg-[#bb4937] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#a03e2e]">Start a petition</button>
-          </nav>
-          <div className="flex items-center gap-3 sm:hidden">
-            <button onClick={() => requestAuth()} className="text-sm font-semibold text-[#52636f]">Sign in</button>
-            <button onClick={onEnter} className="rounded-md bg-[#bb4937] px-3 py-1.5 text-xs font-semibold text-white">Start</button>
+            <button onClick={() => navigate({ name: 'feed' })} className="rounded-md bg-[#2563eb] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#1d4ed8]">Enter Coherent</button>
           </div>
         </div>
       </header>
@@ -83,16 +73,16 @@ export function LandingPage({ onEnter }: { onEnter: () => void }) {
         )}
 
         <div className="relative max-w-2xl">
-          <p className="eyebrow text-[#bb4937]">The 1790 Project</p>
-          <h1 className="mt-4 max-w-3xl font-display text-5xl leading-[1.02] tracking-[-.05em] sm:text-6xl">Turn what you care about into a connected record.</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-7 text-[#5e6f7a]">Search the record, start a rant, or follow a petition. Every object — bill, member, agency, concern — connects to the same graph.</p>
+          <p className="eyebrow text-[#2563eb]">Coherent</p>
+          <h1 className="mt-4 max-w-3xl font-display text-5xl leading-[1.02] tracking-[-.05em] sm:text-6xl">Politics is the subject. Community is the product.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-7 text-[#5e6f7a]">See what is happening, hear what people are saying, share your perspective, and become part of the conversation. Every rant connects to real government data underneath.</p>
 
           <form onSubmit={submitSearch} className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="flex flex-1 items-center rounded-xl bg-[#f4f6f8] px-4 py-3 ring-1 ring-transparent transition focus-within:ring-[#b8cbd3]">
               <Search className="h-5 w-5 text-[#8799a8]" />
               <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Why is my insulin so expensive?" className="min-w-0 flex-1 bg-transparent px-3 text-base text-[#17202a] outline-none placeholder:text-[#9aa6ad]" />
             </div>
-            <button className="rounded-xl bg-[#244e68] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#193b50]">Map it</button>
+            <button onClick={() => navigate({ name: 'feed' })} className="rounded-xl bg-[#2563eb] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#1d4ed8]">Enter Coherent</button>
           </form>
 
           <div className="mt-5 flex flex-wrap gap-2">
@@ -169,10 +159,51 @@ export function LandingPage({ onEnter }: { onEnter: () => void }) {
         )}
       </section>
 
-      <footer className="px-6 py-7 sm:px-10 lg:px-16">
-        <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-          <p className="text-xs text-[#82909a]">A direct, verified line between people and policy-makers.</p>
-          <p className="text-xs text-[#82909a]">Official sources monitored daily.</p>
+      {/* Footer — gray, compact, with sitemap links (h2 headings for SEO) */}
+      <footer className="bg-[#e2e2e2] px-6 py-6 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Compare to */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[.12em] text-[#52636f]">Compare to</h2>
+              <ul className="mt-2 space-y-1">
+                <li><a href="https://change.org" target="_blank" rel="noreferrer" className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">change.org</a></li>
+                <li><a href="https://ipetition.com" target="_blank" rel="noreferrer" className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">ipetition.com</a></li>
+                <li><a href="https://moveon.org" target="_blank" rel="noreferrer" className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">moveon.org</a></li>
+                <li><a href="https://thepetitionsite.com" target="_blank" rel="noreferrer" className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">thepetitionsite.com</a></li>
+              </ul>
+            </div>
+
+            {/* Get Active */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[.12em] text-[#52636f]">Get Active</h2>
+              <ul className="mt-2 space-y-1">
+                <li><button onClick={onEnter} className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Start A Petition</button></li>
+                <li><button onClick={() => navigate({ name: 'petitions' })} className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Petitions Home</button></li>
+                <li><button onClick={() => navigate({ name: 'concern', id: 'clearer-data-broker-opt-outs' })} className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Successful Petitions</button></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[.12em] text-[#52636f]">Legal</h2>
+              <ul className="mt-2 space-y-1">
+                <li><button className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Terms of Service</button></li>
+                <li><button className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Do Not Sell My Info</button></li>
+                <li><button className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Privacy Policy</button></li>
+              </ul>
+            </div>
+
+            {/* Partnerships */}
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-[.12em] text-[#52636f]">Partnerships</h2>
+              <ul className="mt-2 space-y-1">
+                <li><button onClick={() => navigate({ name: 'campaigns' })} className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Campaigns</button></li>
+                <li><button className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Partnerships</button></li>
+                <li><button onClick={() => navigate({ name: 'discover' })} className="text-xs text-[#52636f] hover:text-[#244e68] hover:underline">Elected Officials</button></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </footer>
     </main>

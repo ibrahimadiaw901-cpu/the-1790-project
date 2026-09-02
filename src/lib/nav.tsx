@@ -10,8 +10,18 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 export type DoorType = 'member' | 'bill' | 'subject' | 'committee' | 'agency' | 'executive';
 
 export type Route =
-  // Entry & Discovery
+  // Coherent — social feed layer
   | { name: 'landing' }
+  | { name: 'feed' } // Coherent home feed
+  | { name: 'following' }
+  | { name: 'nearby' }
+  | { name: 'communities' }
+  | { name: 'watchlist' }
+  | { name: 'saved' }
+  | { name: 'my-rants' }
+  | { name: 'messages' }
+  | { name: 'notifications' }
+  // Entry & Discovery
   | { name: 'discover'; query?: string; scope?: string }
   // Districts
   | { name: 'districts' }
@@ -44,8 +54,7 @@ export type Route =
   | { name: 'campaigns' }
   // Polls
   | { name: 'poll'; id: string }
-  // Notifications, Auth, Profile
-  | { name: 'notifications' }
+  // Auth & Profile
   | { name: 'sign-in' }
   | { name: 'sign-up' }
   | { name: 'settings' }
@@ -74,6 +83,15 @@ export function useNav() {
 
 export function navigateTo(path: string): Route {
   if (path === '/' || path === '') return { name: 'landing' };
+  if (path === '/feed') return { name: 'feed' };
+  if (path === '/following') return { name: 'following' };
+  if (path === '/nearby') return { name: 'nearby' };
+  if (path === '/communities') return { name: 'communities' };
+  if (path === '/watchlist') return { name: 'watchlist' };
+  if (path === '/saved') return { name: 'saved' };
+  if (path === '/my-rants') return { name: 'my-rants' };
+  if (path === '/messages') return { name: 'messages' };
+  if (path === '/notifications') return { name: 'notifications' };
   if (path === '/discover') return { name: 'discover' };
   if (path === '/districts') return { name: 'districts' };
   if (path === '/subjects') return { name: 'subjects' };
@@ -137,6 +155,15 @@ export function navigateTo(path: string): Route {
 export function routeToPath(route: Route): string {
   switch (route.name) {
     case 'landing': return '/';
+    case 'feed': return '/feed';
+    case 'following': return '/following';
+    case 'nearby': return '/nearby';
+    case 'communities': return '/communities';
+    case 'watchlist': return '/watchlist';
+    case 'saved': return '/saved';
+    case 'my-rants': return '/my-rants';
+    case 'messages': return '/messages';
+    case 'notifications': return '/notifications';
     case 'discover': return route.query ? `/discover?q=${encodeURIComponent(route.query)}` : '/discover';
     case 'districts': return '/districts';
     case 'district': return `/districts/${route.id}`;

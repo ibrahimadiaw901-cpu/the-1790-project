@@ -6,8 +6,8 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' });
 const sourceSerif = Source_Serif_4({ subsets: ['latin'], variable: '--font-display' });
 
 export const metadata: Metadata = {
-  title: '1790 | The public record, made usable',
-  description: 'A verified public record for federal concerns, sources, and outcomes.',
+  title: 'Coherent — A community for politics',
+  description: 'See what is happening, hear what people are saying, share your perspective, and become part of the conversation. Politics is the subject. Community is the product.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
