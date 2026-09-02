@@ -56,7 +56,6 @@ server.log
 dev.log
 *.log
 1790Project/
-upload/
 download/
 scripts/
 .zscripts/
