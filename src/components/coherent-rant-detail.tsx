@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ChevronRight, Play, ChevronDown, FileText, PenLine, DollarSign, Mail, Edit3 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, ChevronRight, Play, ChevronDown, FileText, PenLine, DollarSign, Mail, Edit3, Users } from 'lucide-react';
 import { useNav } from '@/lib/nav';
 
 export function RantDetail({ id }: { id: string }) {
@@ -33,8 +33,8 @@ export function RantDetail({ id }: { id: string }) {
                 <div className="mx-2 h-1 flex-1 rounded-full bg-white/30">
                   <div className="h-1 w-1/3 rounded-full bg-white"></div>
                 </div>
-                <span className="text-[10px] text-white">🔊</span>
-                <span className="text-[10px] text-white">⚙</span>
+                <button className="flex items-center gap-1 rounded bg-[#2563eb] px-2 py-0.5 text-[10px] font-bold text-white"><DollarSign className="h-3 w-3" /> Donate</button>
+                <button className="flex items-center gap-1 rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white"><ChevronRight className="h-3 w-3" /> Next</button>
                 <span className="text-[10px] text-white">⛶</span>
               </div>
             </div>
@@ -94,8 +94,14 @@ export function RantDetail({ id }: { id: string }) {
             <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-[#374151] transition hover:bg-[#f3f4f6]">
               <Bookmark className="h-4 w-4" /> Save
             </button>
-            <button className="ml-auto rounded-lg p-1.5 text-[#374151] hover:bg-[#f3f4f6]">
-              <MoreHorizontal className="h-4 w-4" />
+            <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-[#059669] transition hover:bg-[#ecfdf5]">
+              <DollarSign className="h-4 w-4" /> Donate
+            </button>
+            <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-[#2563eb] transition hover:bg-[#eff6ff]">
+              <Users className="h-4 w-4" /> Follow
+            </button>
+            <button className="ml-auto flex items-center gap-1.5 rounded-lg bg-[#2563eb] px-3 py-1.5 text-sm font-bold text-white transition hover:bg-[#1d4ed8]">
+              Next <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
@@ -316,20 +322,26 @@ export function RantDetail({ id }: { id: string }) {
         )}
 
         {activeTab === 'community' && (
-          <div className="mt-4 space-y-3">
-            <p className="text-sm font-bold">843 people watching this issue</p>
-            <div className="flex -space-x-2">
-              {['A', 'B', 'C', 'D', 'E'].map((l) => (<div key={l} className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#e0e7ff] text-xs font-bold text-[#2563eb]">{l}</div>))}
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#f3f4f6] text-[10px] font-bold text-[#6b7280]">+838</div>
+          <div className="mt-4 space-y-4">
+            {/* Community identity */}
+            <div className="rounded-xl border border-[#e5e7eb] p-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e0e7ff] text-lg font-bold text-[#2563eb]">H</div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold">Health Care Now</p>
+                  <p className="text-xs text-[#6b7280]">12.4K members &middot; 843 active now</p>
+                </div>
+                <button className="rounded-lg bg-[#2563eb] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#1d4ed8]">Join Community</button>
+              </div>
             </div>
-            <p className="mt-4 text-sm font-bold">3 communities discussing this</p>
-            <div className="space-y-2">
-              {['Health Care Now', 'Patients Rights', 'Affordable Meds'].map((c) => (
-                <button key={c} className="flex w-full items-center gap-2 rounded-lg border border-[#e5e7eb] p-2 text-left transition hover:border-[#2563eb]">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e0e7ff] text-xs font-bold text-[#2563eb]">{c[0]}</div>
-                  <span className="text-sm font-semibold">{c}</span>
-                </button>
-              ))}
+            {/* Activity */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.1em] text-[#374151]">Activity</p>
+              <div className="mt-2 space-y-2">
+                <div className="rounded-lg bg-[#f9fafb] p-3"><p className="text-xs font-bold text-[#2563eb]">2h ago</p><p className="mt-1 text-sm">23 new rants posted in this community</p></div>
+                <div className="rounded-lg bg-[#f9fafb] p-3"><p className="text-xs font-bold text-[#6b7280]">Yesterday</p><p className="mt-1 text-sm">Community discussion: "What should we ask Sen. Cruz at the hearing?"</p></div>
+                <div className="rounded-lg bg-[#f9fafb] p-3"><p className="text-xs font-bold text-[#6b7280]">3 days ago</p><p className="mt-1 text-sm">Petition reached 3,000 signatures</p></div>
+              </div>
             </div>
           </div>
         )}
